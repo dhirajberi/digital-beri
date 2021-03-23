@@ -1804,3 +1804,10 @@ section {
     padding-top: 4px;
   }
 }
+
+.banner {
+  height: 90px;
+  width: 100%;
+  margin-top: 15px;
+
+}
