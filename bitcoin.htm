@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Deployment</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" async="true">
+        (function () {
+            var host = 'www.themoneytizer.com';
+            var element = document.createElement('script');
+            var firstScript = document.getElementsByTagName('script')[0];
+            var url = 'https://quantcast.mgr.consensu.org'
+                .concat('/choice/', '6Fv0cGNfc_bw8', '/', host, '/choice.js');
+            var uspTries = 0;
+            var uspTriesLimit = 3;
+            element.async = true;
+            element.type = 'text/javascript';
+            element.src = url;
+
+            firstScript.parentNode.insertBefore(element, firstScript);
+
+            function makeStub() {
+                var TCF_LOCATOR_NAME = '__tcfapiLocator';
+                var queue = [];
+                var win = window;
+                var cmpFrame;
+
+                function addFrame() {
+                    var doc = win.document;
+                    var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+                    if (!otherCMP) {
+                        if (doc.body) {
+                            var iframe = doc.createElement('iframe');
+
+                            iframe.style.cssText = 'display:none';
+                            iframe.name = TCF_LOCATOR_NAME;
+                            doc.body.appendChild(iframe);
+                        } else {
+                            setTimeout(addFrame, 5);
+                        }
+                    }
+                    return !otherCMP;
+                }
+
+                function tcfAPIHandler() {
+                    var gdprApplies;
+                    var args = arguments;
+
+                    if (!args.length) {
+                        return queue;
+                    } else if (args[0] === 'setGdprApplies') {
+                        if (
+                            args.length > 3 &&
+                            args[2] === 2 &&
+                            typeof args[3] === 'boolean'
+                        ) {
+                            gdprApplies = args[3];
+                            if (typeof args[2] === 'function') {
+                                args[2]('set', true);
+                            }
+                        }
+                    } else if (args[0] === 'ping') {
+                        var retr = {
+                            gdprApplies: gdprApplies,
+                            cmpLoaded: false,
+                            cmpStatus: 'stub'
+                        };
+
+                        if (typeof args[2] === 'function') {
+                            args[2](retr);
+                        }
+                    } else {
+                        queue.push(args);
+                    }
+                }
+
+                function postMessageEventHandler(event) {
+                    var msgIsString = typeof event.data === 'string';
+                    var json = {};
+
+                    try {
+                        if (msgIsString) {
+                            json = JSON.parse(event.data);
+                        } else {
+                            json = event.data;
+                        }
+                    } catch (ignore) {}
+
+                    var payload = json.__tcfapiCall;
+
+                    if (payload) {
+                        window.__tcfapi(
+                            payload.command,
+                            payload.version,
+                            function (retValue, success) {
+                                var returnMsg = {
+                                    __tcfapiReturn: {
+                                        returnValue: retValue,
+                                        success: success,
+                                        callId: payload.callId
+                                    }
+                                };
+                                if (msgIsString) {
+                                    returnMsg = JSON.stringify(returnMsg);
+                                }
+                                event.source.postMessage(returnMsg, '*');
+                            },
+                            payload.parameter
+                        );
+                    }
+                }
+
+                while (win) {
+                    try {
+                        if (win.frames[TCF_LOCATOR_NAME]) {
+                            cmpFrame = win;
+                            break;
+                        }
+                    } catch (ignore) {}
+
+                    if (win === window.top) {
+                        break;
+                    }
+                    win = win.parent;
+                }
+                if (!cmpFrame) {
+                    addFrame();
+                    win.__tcfapi = tcfAPIHandler;
+                    win.addEventListener('message', postMessageEventHandler, false);
+                }
+            };
+
+            if (typeof module !== 'undefined') {
+                module.exports = makeStub;
+            } else {
+                makeStub();
+            }
+
+            var uspStubFunction = function () {
+                var arg = arguments;
+                if (typeof window.__uspapi !== uspStubFunction) {
+                    setTimeout(function () {
+                        if (typeof window.__uspapi !== 'undefined') {
+                            window.__uspapi.apply(window.__uspapi, arg);
+                        }
+                    }, 500);
+                }
+            };
+
+            var checkIfUspIsReady = function () {
+                uspTries++;
+                if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+                    console.warn('USP is not accessible');
+                } else {
+                    clearInterval(uspInterval);
+                }
+            };
+
+            if (typeof window.__uspapi === 'undefined') {
+                window.__uspapi = uspStubFunction;
+                var uspInterval = setInterval(checkIfUspIsReady, 6000);
+            }
+        })();
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E9W3KW8MZ7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-E9W3KW8MZ7');
+    </script>
+
+</head>
+
+<body>
+    <div class="fix">
+        <div id="navbar">
+            <div id="67766-1">
+                <script src="//ads.themoneytizer.com/s/gen.js?type=1"></script>
+                <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=1"></script>
+            </div>
+        </div>
+
+        <div class="content">
+            <h3>What is Bitcoin?</h3>
+
+            <!--Video Ads-->
+            <div id="73411-11">
+                <script src="//ads.themoneytizer.com/s/gen.js?type=11"></script>
+                <script src="//ads.themoneytizer.com/s/requestform.js?siteId=73411&formatId=11"></script>
+            </div>
+            <!--Video Ads Ends-->
+
+            <p>Bitcoin is a digital currency that was created in January 2009. It follows the ideas set out in a
+                whitepaper by the mysterious and pseudonymous Satoshi Nakamoto.1﻿ The identity of the person or persons
+                who created the technology is still a mystery. Bitcoin offers the promise of lower transaction fees than
+                traditional online payment mechanisms and, unlike government-issued currencies, it is operated by a
+                decentralized authority.</p>
+
+            <div class="sidebar">
+                <div id="67766-2">
+                    <script src="//ads.themoneytizer.com/s/gen.js?type=2"></script>
+                    <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=2"></script>
+                </div>
+            </div>
+            
+            <p>Bitcoin is a type of cryptocurrency. There are no physical bitcoins, only balances kept on a public
+                ledger that everyone has transparent access to. All bitcoin transactions are verified by a massive
+                amount of computing power. Bitcoins are not issued or backed by any banks or governments, nor are
+                individual bitcoins valuable as a commodity. Despite it not being legal tender, Bitcoin is very popular
+                and has triggered the launch of hundreds of other cryptocurrencies, collectively referred to as
+                altcoins. Bitcoin is commonly abbreviated as "BTC."</p>
+
+        </div>
+
+        <!-- Sidebar -->
+        <div id="67766-3">
+            <script src="//ads.themoneytizer.com/s/gen.js?type=3"></script>
+            <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=3"></script>
+        </div>
+
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+
+</body>
+
+</html>
