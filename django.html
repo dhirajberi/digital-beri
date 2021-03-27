@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Deployment</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" async="true">
+        (function () {
+            var host = 'www.themoneytizer.com';
+            var element = document.createElement('script');
+            var firstScript = document.getElementsByTagName('script')[0];
+            var url = 'https://quantcast.mgr.consensu.org'
+                .concat('/choice/', '6Fv0cGNfc_bw8', '/', host, '/choice.js');
+            var uspTries = 0;
+            var uspTriesLimit = 3;
+            element.async = true;
+            element.type = 'text/javascript';
+            element.src = url;
+
+            firstScript.parentNode.insertBefore(element, firstScript);
+
+            function makeStub() {
+                var TCF_LOCATOR_NAME = '__tcfapiLocator';
+                var queue = [];
+                var win = window;
+                var cmpFrame;
+
+                function addFrame() {
+                    var doc = win.document;
+                    var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+                    if (!otherCMP) {
+                        if (doc.body) {
+                            var iframe = doc.createElement('iframe');
+
+                            iframe.style.cssText = 'display:none';
+                            iframe.name = TCF_LOCATOR_NAME;
+                            doc.body.appendChild(iframe);
+                        } else {
+                            setTimeout(addFrame, 5);
+                        }
+                    }
+                    return !otherCMP;
+                }
+
+                function tcfAPIHandler() {
+                    var gdprApplies;
+                    var args = arguments;
+
+                    if (!args.length) {
+                        return queue;
+                    } else if (args[0] === 'setGdprApplies') {
+                        if (
+                            args.length > 3 &&
+                            args[2] === 2 &&
+                            typeof args[3] === 'boolean'
+                        ) {
+                            gdprApplies = args[3];
+                            if (typeof args[2] === 'function') {
+                                args[2]('set', true);
+                            }
+                        }
+                    } else if (args[0] === 'ping') {
+                        var retr = {
+                            gdprApplies: gdprApplies,
+                            cmpLoaded: false,
+                            cmpStatus: 'stub'
+                        };
+
+                        if (typeof args[2] === 'function') {
+                            args[2](retr);
+                        }
+                    } else {
+                        queue.push(args);
+                    }
+                }
+
+                function postMessageEventHandler(event) {
+                    var msgIsString = typeof event.data === 'string';
+                    var json = {};
+
+                    try {
+                        if (msgIsString) {
+                            json = JSON.parse(event.data);
+                        } else {
+                            json = event.data;
+                        }
+                    } catch (ignore) {}
+
+                    var payload = json.__tcfapiCall;
+
+                    if (payload) {
+                        window.__tcfapi(
+                            payload.command,
+                            payload.version,
+                            function (retValue, success) {
+                                var returnMsg = {
+                                    __tcfapiReturn: {
+                                        returnValue: retValue,
+                                        success: success,
+                                        callId: payload.callId
+                                    }
+                                };
+                                if (msgIsString) {
+                                    returnMsg = JSON.stringify(returnMsg);
+                                }
+                                event.source.postMessage(returnMsg, '*');
+                            },
+                            payload.parameter
+                        );
+                    }
+                }
+
+                while (win) {
+                    try {
+                        if (win.frames[TCF_LOCATOR_NAME]) {
+                            cmpFrame = win;
+                            break;
+                        }
+                    } catch (ignore) {}
+
+                    if (win === window.top) {
+                        break;
+                    }
+                    win = win.parent;
+                }
+                if (!cmpFrame) {
+                    addFrame();
+                    win.__tcfapi = tcfAPIHandler;
+                    win.addEventListener('message', postMessageEventHandler, false);
+                }
+            };
+
+            if (typeof module !== 'undefined') {
+                module.exports = makeStub;
+            } else {
+                makeStub();
+            }
+
+            var uspStubFunction = function () {
+                var arg = arguments;
+                if (typeof window.__uspapi !== uspStubFunction) {
+                    setTimeout(function () {
+                        if (typeof window.__uspapi !== 'undefined') {
+                            window.__uspapi.apply(window.__uspapi, arg);
+                        }
+                    }, 500);
+                }
+            };
+
+            var checkIfUspIsReady = function () {
+                uspTries++;
+                if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+                    console.warn('USP is not accessible');
+                } else {
+                    clearInterval(uspInterval);
+                }
+            };
+
+            if (typeof window.__uspapi === 'undefined') {
+                window.__uspapi = uspStubFunction;
+                var uspInterval = setInterval(checkIfUspIsReady, 6000);
+            }
+        })();
+    </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E9W3KW8MZ7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-E9W3KW8MZ7');
+    </script>
+
+    <!-- Footer ads -->
+    <div id="67766-6">
+        <script src="//ads.themoneytizer.com/s/gen.js?type=6"></script>
+        <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=6"></script>
+    </div>
+
+</head>
+
+<body>
+    <div class="fix">
+        <div class="header">
+            <h2>Digital Beri</h2>
+        </div>
+
+        <div id="navbar">
+            <div id="67766-1">
+                <script src="//ads.themoneytizer.com/s/gen.js?type=1"></script>
+                <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=1"></script>
+            </div>
+        </div>
+
+        <div class="content">
+            <h3>Django Deployment</h3>
+
+            <!--Video Ads-->
+            <div id="73411-11">
+                <script src="//ads.themoneytizer.com/s/gen.js?type=11"></script>
+                <script src="//ads.themoneytizer.com/s/requestform.js?siteId=73411&formatId=11"></script>
+            </div>
+            <!--Video Ads Ends-->
+
+            <p><strong>Starting our Git repository</strong></p>
+            <p>Git tracks changes to a particular set of files in what's called a code repository (or "repo" for short).
+                Let's start one for our project. Open up your console and run these commands</p>
+            <pre>
+         <code>
+            $ git init
+            Initialized empty Git repository in ~/djangogirls/.git/
+            $ git config --global user.name "Your Name"
+            $ git config --global user.email you@example.com
+         </code>
+         </pre>
+            <p>Initializing the git repository is something we need to do only once per project (and you won't have to
+                re-enter the username and email ever again).
+
+                Git will track changes to all the files and folders in this directory, but there are some files we want
+                it
+                to ignore. We do this by creating a file called .gitignore in the base directory. Open up your editor
+                and
+                create a new file with the following contents:</p>
+
+            <pre><code>
+               # Python
+               *.pyc
+               *~
+               __pycache__
+               
+               # Env
+               .env
+               myvenv/
+               venv/
+               
+               # Database
+               db.sqlite3
+               
+               # Static folder at project root
+               /static/
+               
+               # macOS
+               ._*
+               .DS_Store
+               .fseventsd
+               .Spotlight-V100
+               
+               # Windows
+               Thumbs.db*
+               ehthumbs*.db
+               [Dd]esktop.ini
+               $RECYCLE.BIN/
+               
+               # Visual Studio
+               .vscode/
+               .history/
+               *.code-workspace
+               </code></pre>
+
+            <p>And save it as .gitignore in the "djangogirls" folder.</p>
+            <p>It's a good idea to use a git status command before git add or whenever you find yourself unsure of what
+                has
+                changed. This will help prevent any surprises from happening, such as wrong files being added or
+                committed.
+                The git status command returns information about any untracked/modified/staged files, the branch status,
+                and
+                much more. The output should be similar to the following:</p>
+            <pre><code>
+            $ git status
+            On branch master
+            
+            No commits yet
+            
+            Untracked files:
+              (use "git add &lt;file&gt;..." to include in what will be committed)
+            
+                    .gitignore
+                    blog/
+                    manage.py
+                    mysite/
+                    requirements.txt
+            
+            nothing added to commit but untracked files present (use "git add" to track)
+            </code></pre>
+            <p>And finally we save our changes. Go to your console and run these commands:</p>
+            <pre><code>
+               $ git add .
+               $ git commit -m "My Django Girls app, first commit"
+                [...]
+                13 files changed, 200 insertions(+)
+                create mode 100644 .gitignore
+                [...]
+                create mode 100644 mysite/wsgi.py
+            </code></pre>
+            <p><strong>Pushing your code to GitHub</strong></p>
+            <p>Go to GitHub.com and sign up for a new, free user account. (If you already did that in the workshop prep,
+                that is great!) Be sure to remember your password (add it to your password manager, if you use one).
+
+                Then, create a new repository, giving it the name "my-first-blog". Leave the "initialize with a README"
+                checkbox unchecked, leave the .gitignore option blank (we've done that manually) and leave the License
+                as None.</p>
+            <p>On the next screen, you'll be shown your repo's clone URL, which you will use in some of the commands
+                that follow:</p>
+            <p>Now we need to hook up the Git repository on your computer to the one up on GitHub.
+
+                Type the following into your console (replace <your-github-username> with the username you entered when
+                    you created your GitHub account, but without the angle-brackets -- the URL should match the clone
+                    URL you just saw):</p>
+            <pre><code>
+            $ git remote add origin https://github.com/&lt;your-github-username&gt;/my-first-blog.git
+                  
+            $ git push -u origin master
+            </code></pre>
+            <p>When you push to GitHub, you'll be asked for your GitHub username and password (either right there in the
+                command-line window or in a pop-up window), and after entering credentials you should see something like
+                this:</p>
+            <pre><code>
+            Counting objects: 6, done.
+            Writing objects: 100% (6/6), 200 bytes | 0 bytes/s, done.
+            Total 3 (delta 0), reused 0 (delta 0)
+            To https://github.com/ola/my-first-blog.git
+             * [new branch]      master -&gt; master
+            Branch master set up to track remote branch master from origin.
+            </code></pre>
+            <p>Your code is now on GitHub. Go and check it out! You'll find it's in fine company – Django, the Django
+                Girls Tutorial, and many other great open source software projects also host their code on GitHub. :)
+            </p>
+            <h3>Setting up our blog on PythonAnywhere</h3>
+            <p>PythonAnywhere is a service for running Python code on servers "in the cloud". We'll use it for hosting our site, live and on the Internet.
+            We will be hosting the blog we're building on PythonAnywhere. Sign up for a "Beginner" account on PythonAnywhere (the free tier is fine, you don't need a credit card).</p>
+            <h3>Creating a PythonAnywhere API token</h3>
+            <p>This is something you only need to do once. When you've signed up for PythonAnywhere, you'll be taken to your dashboard. Find the link near the top right to your "Account" page:</p>
+            <p>then select the tab named "API token", and hit the button that says "Create new API token".</p>
+            <h3>Configuring our site on PythonAnywhere</h3>
+            <p>Go back to the main PythonAnywhere Dashboard by clicking on the logo, and choose the option to start a "Bash" console – that's the PythonAnywhere version of a command line, just like the one on your computer.</p>
+            <p> a web app on PythonAnywhere involves pulling down your code from GitHub, and then configuring PythonAnywhere to recognise it and start serving it as a web application. There are manual ways of doing it, but PythonAnywhere provides a helper tool that will do it all for you. Let's install it first:</p>
+            <pre><code>$ pip3.8 install --user pythonanywhere
+            </code></pre>
+
+            <p> should print out some things like Collecting pythonanywhere, and eventually end with a line saying Successfully installed (...) pythonanywhere- (...).</p>
+
+            <p>Now we run the helper to automatically configure our app from GitHub. Type the following into the console on PythonAnywhere (don't forget to use your GitHub username in place of <your-github-username>, so that the URL matches the clone URL from GitHub):</p>
+            <pre><code>$ pa_autoconfigure_django.py --python=3.8 https://github.com/&lt;your-github-username&gt;/my-first-blog.git
+            </code></pre>
+            <p>As you watch that running, you'll be able to see what it's doing:</p>
+            <ul>
+                <li>Downloading your code from GitHub</li>
+                <li>Creating a virtualenv on PythonAnywhere, just like the one on your own computer</li>
+                <li>Updating your settings file with some deployment settings</li>
+                <li>Setting up a database on PythonAnywhere using the manage.py migrate command</li>
+                <li>Setting up your static files (we'll learn about these later)</li>
+                <li>And configuring PythonAnywhere to serve your web app via its API</li>
+            </ul>
+            <p>On PythonAnywhere all those steps are automated, but they're the same steps you would have to go through with any other server provider.</p>
+
+            <p>The main thing to notice right now is that your database on PythonAnywhere is actually totally separate from your database on your own computer, so it can have different posts and admin accounts. As a result, just as we did on your own computer, we need to initialize the admin account with createsuperuser. PythonAnywhere has automatically activated your virtualenv for you, so all you need to do is run:</p>
+
+            <pre><code>(ola.pythonanywhere.com) $ python manage.py createsuperuser
+            </code></pre>
+
+            <p>Type in the details for your admin user. Best to use the same ones as you're using on your own computer to avoid any confusion, unless you want to make the password on PythonAnywhere more secure.</p>
+
+            <p>Now, if you like, you can also take a look at your code on PythonAnywhere using ls:</p>
+
+            <pre><code>(ola.pythonanywhere.com) $ ls
+                blog  db.sqlite3  manage.py  mysite requirements.txt static
+                (ola.pythonanywhere.com) $ ls blog/
+                __init__.py  __pycache__  admin.py  apps.py  migrations  models.py
+                tests.py  views.py
+            </code></pre>
+
+            <p>You can also go to the "Files" page and navigate around using PythonAnywhere's built-in file browser. (From the Console page, you can get to other PythonAnywhere pages from the menu button in the upper right corner. Once you're on one of the pages, there are links to the other ones near the top.)</p>
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div id="67766-2">
+                <script src="//ads.themoneytizer.com/s/gen.js?type=2"></script>
+                <script src="//ads.themoneytizer.com/s/requestform.js?siteId=67766&formatId=2"></script>
+            </div>
+        </div>
+
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var navbar = document.getElementById("navbar");
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>
+
+</body>
+
+</html>
