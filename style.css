@@ -51,3 +51,9 @@ body {
     padding-left: 300px;
     /* padding-left: 24%; */
 }
+
+.banner {
+    width: 728;
+    height: 90;
+    background-color: red;
+}
